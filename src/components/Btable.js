@@ -1,6 +1,10 @@
 
 import React, { Component } from 'react';
 import {BootstrapTable, TableHeaderColumn,SearchField } from 'react-bootstrap-table';
+import ConfigureStore from './../store/configureStore';
+import {database} from '../firebase';
+import {connect} from 'react-redux';
+import {LOAD_FIREBASE_DATA} from './../actions';
 import 'react-bootstrap-table/dist/react-bootstrap-table-all.min.css';
 
 const products = [];
@@ -58,7 +62,9 @@ class ExpandRow extends React.Component {
   constructor(props) {
     super(props);
   }
-
+  componentWillMount = () => {
+    this.props.LOAD_FIREBASE_DATA();
+  }
   isExpandableRow(row) {
     if (row.id < 3)
     return true;
@@ -91,4 +97,9 @@ class ExpandRow extends React.Component {
     );
   }
 }
-export default ExpandRow;
+// export default ExpandRow;
+const mapStateToProps = ({main}) => {
+  const {isloading, data, name} = main;
+  return {isloading, data, name}
+}
+export default connect(mapStateToProps, {LOAD_FIREBASE_DATA})(ExpandRow);
