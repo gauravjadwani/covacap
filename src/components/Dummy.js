@@ -1,10 +1,10 @@
 
 import React, { Component } from 'react';
 import {BootstrapTable, TableHeaderColumn,SearchField } from 'react-bootstrap-table';
-import ConfigureStore from './../store/configureStore';
-import {database} from '../firebase';
-import {connect} from 'react-redux';
-import {LOAD_FIREBASE_DATA} from './../actions';
+// import ConfigureStore from './../store/configureStore';
+// import {database} from '../firebase';
+// import {connect} from 'react-redux';
+// import {LOAD_FIREBASE_DATA} from './../actions';
 import 'react-bootstrap-table/dist/react-bootstrap-table-all.min.css';
 
 const products = [];
@@ -58,15 +58,12 @@ class BSTable extends React.Component {
 }
 
 
-class ExpandRow extends React.Component {
+class Dummy extends React.Component {
   constructor(props) {
     super(props);
   }
   componentWillMount = () => {
-    this.props.LOAD_FIREBASE_DATA();
-  }
-  componentWillReceiveProps=(props)=>{
-    console.log('props',props)
+    // this.props.LOAD_FIREBASE_DATA();
   }
   isExpandableRow(row) {
     if (row.id < 3)
@@ -83,13 +80,12 @@ class ExpandRow extends React.Component {
 
   render() {
     console.log('products',products);
-      console.log('dataList',this.props.dataList);
     const options = {
       expandRowBgColor: 'rgb(242, 255, 163)'
       // expandBy: 'column'  // Currently, available value is row and column, default is row
     };
     return (
-      <BootstrapTable data={ this.props.dataList }
+      <BootstrapTable data={ products }
         options={ options }
         expandableRow={ this.isExpandableRow }
         expandComponent={ this.expandComponent }
@@ -98,23 +94,9 @@ class ExpandRow extends React.Component {
         <TableHeaderColumn dataField='Book_Size' expandable={ false }>Product Name</TableHeaderColumn>
         <TableHeaderColumn dataField='CONTROL' expandable={ false }>Product Price</TableHeaderColumn>
         <TableHeaderColumn dataField='Current_Cut_Off'>Product ID</TableHeaderColumn>
-        <TableHeaderColumn dataField='Name' expandable={ false }>Product Name</TableHeaderColumn>
-        <TableHeaderColumn dataField='No_Of_Orders' expandable={ false }>Product Price</TableHeaderColumn>
-        <TableHeaderColumn dataField='ORDCOLUMN' >Product ID</TableHeaderColumn>
-        <TableHeaderColumn dataField='PKEY' expandable={ false }>Product Name</TableHeaderColumn>
-        <TableHeaderColumn dataField='Price_Guidance' expandable={ false }>Product Price</TableHeaderColumn>
-        <TableHeaderColumn dataField='Remarks' >Product ID</TableHeaderColumn>
-        <TableHeaderColumn dataField='Save' expandable={ false }>Product Name</TableHeaderColumn>
-        <TableHeaderColumn dataField='Size(MM)' expandable={ false }>Product Price</TableHeaderColumn>
-        <TableHeaderColumn dataField='Status' >Product ID</TableHeaderColumn>
-        <TableHeaderColumn dataField='Tenor' expandable={ false }>Product Name</TableHeaderColumn>
       </BootstrapTable>
     );
   }
 }
-// export default ExpandRow;
-const mapStateToProps = ({main}) => {
-  const {dataList} = main;
-  return {dataList}
-}
-export default connect(mapStateToProps, {LOAD_FIREBASE_DATA})(ExpandRow);
+
+export default Dummy;

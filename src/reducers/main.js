@@ -1,11 +1,9 @@
 let INITIAL_STATE={
-dataList:[],
-currentTab:0,
-currentItem:0
+dataList:[]
 }
 export default (state=INITIAL_STATE,action) => {
   switch(action.type){
-          case 'CALL_LIST':
+          case 'LOAD_FIREBASE_DATA':
             return {...state,
               dataList:action.payload
             }
