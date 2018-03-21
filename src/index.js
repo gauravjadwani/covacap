@@ -1,8 +1,18 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import registerServiceWorker from './registerServiceWorker';
-
-ReactDOM.render(<App />, document.getElementById('root'));
+import {render} from 'react-dom';
+import routes from './routes';
+import ReactDOM from 'react-dom';
+import {Router, browserHistory} from 'react-router';
+// import configureStore from './store/configureStore';
+import {Provider} from 'react-redux';
+import thunk from 'redux-thunk';
+import {applyMiddleware} from 'redux';
+// const store = configureStore(applyMiddleware(thunk));
+// const store = createStore(reducers, {}, applyMiddleware(ReduxThunk));
+ReactDOM.render(
+  <Router history={browserHistory} routes={routes}/>,
+document.getElementById('root'));
 registerServiceWorker();

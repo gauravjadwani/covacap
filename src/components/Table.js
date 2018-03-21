@@ -51,6 +51,7 @@ class Table extends React.Component {
     this.state = {
       data: makeData()
     };
+    console.log('data ',this.state.data);
   }
   render() {
     const { data } = this.state;
@@ -94,5 +95,4 @@ class Table extends React.Component {
     );
   }
 }
-
-render(<App />, document.getElementById("root"));
+export default Table;
