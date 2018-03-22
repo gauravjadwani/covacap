@@ -3,6 +3,10 @@ body {
   font-weight: 300;
   font-size: 14px;
 }
-.h{
-  /* display: none; */
+.my-body-class{
+  padding: 20%;
+}
+.react-bs-table table td, .react-bs-table table th {
+  word-wrap: break-word !important;
+      white-space: pre-wrap !important;
 }

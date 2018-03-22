@@ -86,12 +86,13 @@ class ExpandRow extends React.Component {
         options={ options }
         expandableRow={ this.isExpandableRow }
         expandComponent={ this.expandComponent }
+         tableBodyClass='my-body-class'
         search
         className="tablee">
         <TableHeaderColumn dataField='id' isKey  columnClassName={ this.columnClassNameFormat } className="h" hidden={true}>ID</TableHeaderColumn>
         <TableHeaderColumn dataField='Book@Reoffer'>Book@Reoffer</TableHeaderColumn>
         <TableHeaderColumn dataField='Book_Size' >Book_Size</TableHeaderColumn>
-        <TableHeaderColumn dataField='CONTROL' >'CONTROL'</TableHeaderColumn>
+        <TableHeaderColumn dataField='CONTROL' >CONTROL</TableHeaderColumn>
         <TableHeaderColumn dataField='Current_Cut_Off'>Current_Cut_Off</TableHeaderColumn>
         <TableHeaderColumn dataField='Name'>Name</TableHeaderColumn>
         <TableHeaderColumn dataField='No_Of_Orders' >No_Of_Orders</TableHeaderColumn>
@@ -100,7 +101,7 @@ class ExpandRow extends React.Component {
         <TableHeaderColumn dataField='Price_Guidance' >Price_Guidance</TableHeaderColumn>
         <TableHeaderColumn dataField='Remarks' >Remarks</TableHeaderColumn>
         <TableHeaderColumn dataField='Save' >Save</TableHeaderColumn>
-        <TableHeaderColumn dataField='Size(MM)' >Size(MM)</TableHeaderColumn>
+        <TableHeaderColumn dataField='Size(MM)' >Size</TableHeaderColumn>
         <TableHeaderColumn dataField='Status' >Status</TableHeaderColumn>
         <TableHeaderColumn dataField='Tenor' >Tenor</TableHeaderColumn>
       </BootstrapTable>
