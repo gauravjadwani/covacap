@@ -7,49 +7,34 @@ import {connect} from 'react-redux';
 import {LOAD_FIREBASE_DATA} from './../actions';
 import 'react-bootstrap-table/dist/react-bootstrap-table-all.min.css';
 
-const products = [];
-
-function addProducts(quantity) {
-  const startId = products.length;
-  for (let i = 0; i < quantity; i++) {
-    const id = startId + i;
-    if (i < 3) {
-      products.push({
-        id: id,
-        name: 'Item name ' + id,
-        price: 2100 + i,
-        expand: [ {
-          fieldA: 'test1',
-          fieldB: (i + 1) * 99,
-          fieldC: (i + 1) * Math.random() * 100,
-          fieldD: '123eedd' + i
-        }, {
-          fieldA: 'test2',
-          fieldB: i * 99,
-          fieldC: i * Math.random() * 100,
-          fieldD: '123eedd' + i
-        } ]
-      });
-    } else {
-      products.push({
-        id: id,
-        name: 'Item name ' + id,
-        price: 2100 + i
-      });
-    }
-  }
-}
-addProducts(5);
-
 class BSTable extends React.Component {
+  columnClassNameFormat(fieldValue, row, rowIdx, colIdx) {
+  // fieldValue is column value
+  // row is whole row object
+  // rowIdx is index of row
+  // colIdx is index of column
+  return colIdx === 0 ? 'h' : '';
+}
   render() {
     if (this.props.data) {
+      console.log('child',this.props.data);
       return (
-        <BootstrapTable data={ this.props.data }>
-          <TableHeaderColumn dataField='fieldA' isKey={ true }>Field A</TableHeaderColumn>
-          <TableHeaderColumn dataField='fieldB'>Field B</TableHeaderColumn>
-          <TableHeaderColumn dataField='fieldC'>Field C</TableHeaderColumn>
-          <TableHeaderColumn dataField='fieldD'>Field D</TableHeaderColumn>
+        <BootstrapTable data={ this.props.data}>
+        <TableHeaderColumn dataField='id' isKey columnClassName={ this.columnClassNameFormat }  hidden={true}>ID</TableHeaderColumn>
+        <TableHeaderColumn dataField='Book@Reoffer'>Book@Reoffer</TableHeaderColumn>
+        <TableHeaderColumn dataField='Book_Size' >Book_Size</TableHeaderColumn>
+        <TableHeaderColumn dataField='CONTROL' >'CONTROL'</TableHeaderColumn>
+        <TableHeaderColumn dataField='Current_Cut_Off'>Current_Cut_Off</TableHeaderColumn>
+        <TableHeaderColumn dataField='Name'>Name</TableHeaderColumn>
+        <TableHeaderColumn dataField='No_Of_Orders' >No_Of_Orders</TableHeaderColumn>
+        <TableHeaderColumn dataField='ORDCOLUMN' >ORDCOLUMN</TableHeaderColumn>
+        <TableHeaderColumn dataField='PKEY' >PKEY</TableHeaderColumn>
+        <TableHeaderColumn dataField='Price_Guidance' >Price_Guidance</TableHeaderColumn>
+        <TableHeaderColumn dataField='Remarks' >Remarks</TableHeaderColumn>
+        <TableHeaderColumn dataField='Save' >Save</TableHeaderColumn>
+        <TableHeaderColumn dataField='Size(MM)' >Size(MM)</TableHeaderColumn>
+        <TableHeaderColumn dataField='Status' >Status</TableHeaderColumn>
+        <TableHeaderColumn dataField='Tenor' >Tenor</TableHeaderColumn>
         </BootstrapTable>);
     } else {
       return (<p>?</p>);
@@ -69,45 +54,55 @@ class ExpandRow extends React.Component {
     console.log('props',props)
   }
   isExpandableRow(row) {
-    if (row.id < 3)
-    return true;
-    else return false;
+    console.log('row.expand',row.expand);
+    if (row.expand)
+      return true;
+    else
+      return false;
   }
 
   expandComponent(row) {
-    console.log('row.expand',row.expand);
+
     return (
       <BSTable data={ row.expand } />
     );
   }
+  columnClassNameFormat(fieldValue, row, rowIdx, colIdx) {
+  // fieldValue is column value
+  // row is whole row object
+  // rowIdx is index of row
+  // colIdx is index of column
+  return colIdx === 0 ? 'h' : '';
+}
 
   render() {
-    console.log('products',products);
-      console.log('dataList',this.props.dataList);
     const options = {
       expandRowBgColor: 'rgb(242, 255, 163)'
       // expandBy: 'column'  // Currently, available value is row and column, default is row
     };
+    console.log('expa',this.expandComponent);
     return (
       <BootstrapTable data={ this.props.dataList }
         options={ options }
         expandableRow={ this.isExpandableRow }
         expandComponent={ this.expandComponent }
-        search>
-        <TableHeaderColumn dataField='Book@Reoffer' isKey={ true }>Product ID</TableHeaderColumn>
-        <TableHeaderColumn dataField='Book_Size' expandable={ false }>Product Name</TableHeaderColumn>
-        <TableHeaderColumn dataField='CONTROL' expandable={ false }>Product Price</TableHeaderColumn>
-        <TableHeaderColumn dataField='Current_Cut_Off'>Product ID</TableHeaderColumn>
-        <TableHeaderColumn dataField='Name' expandable={ false }>Product Name</TableHeaderColumn>
-        <TableHeaderColumn dataField='No_Of_Orders' expandable={ false }>Product Price</TableHeaderColumn>
-        <TableHeaderColumn dataField='ORDCOLUMN' >Product ID</TableHeaderColumn>
-        <TableHeaderColumn dataField='PKEY' expandable={ false }>Product Name</TableHeaderColumn>
-        <TableHeaderColumn dataField='Price_Guidance' expandable={ false }>Product Price</TableHeaderColumn>
-        <TableHeaderColumn dataField='Remarks' >Product ID</TableHeaderColumn>
-        <TableHeaderColumn dataField='Save' expandable={ false }>Product Name</TableHeaderColumn>
-        <TableHeaderColumn dataField='Size(MM)' expandable={ false }>Product Price</TableHeaderColumn>
-        <TableHeaderColumn dataField='Status' >Product ID</TableHeaderColumn>
-        <TableHeaderColumn dataField='Tenor' expandable={ false }>Product Name</TableHeaderColumn>
+        search
+        className="tablee">
+        <TableHeaderColumn dataField='id' isKey  columnClassName={ this.columnClassNameFormat } className="h" hidden={true}>ID</TableHeaderColumn>
+        <TableHeaderColumn dataField='Book@Reoffer'>Book@Reoffer</TableHeaderColumn>
+        <TableHeaderColumn dataField='Book_Size' >Book_Size</TableHeaderColumn>
+        <TableHeaderColumn dataField='CONTROL' >'CONTROL'</TableHeaderColumn>
+        <TableHeaderColumn dataField='Current_Cut_Off'>Current_Cut_Off</TableHeaderColumn>
+        <TableHeaderColumn dataField='Name'>Name</TableHeaderColumn>
+        <TableHeaderColumn dataField='No_Of_Orders' >No_Of_Orders</TableHeaderColumn>
+        <TableHeaderColumn dataField='ORDCOLUMN' >ORDCOLUMN</TableHeaderColumn>
+        <TableHeaderColumn dataField='PKEY' >PKEY</TableHeaderColumn>
+        <TableHeaderColumn dataField='Price_Guidance' >Price_Guidance</TableHeaderColumn>
+        <TableHeaderColumn dataField='Remarks' >Remarks</TableHeaderColumn>
+        <TableHeaderColumn dataField='Save' >Save</TableHeaderColumn>
+        <TableHeaderColumn dataField='Size(MM)' >Size(MM)</TableHeaderColumn>
+        <TableHeaderColumn dataField='Status' >Status</TableHeaderColumn>
+        <TableHeaderColumn dataField='Tenor' >Tenor</TableHeaderColumn>
       </BootstrapTable>
     );
   }

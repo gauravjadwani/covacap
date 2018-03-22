@@ -58,21 +58,20 @@ class BSTable extends React.Component {
 }
 
 
-class Dummy extends React.Component {
+
+class D extends React.Component {
   constructor(props) {
     super(props);
   }
-  componentWillMount = () => {
-    // this.props.LOAD_FIREBASE_DATA();
-  }
+
   isExpandableRow(row) {
-    if (row.id < 3)
-    return true;
+        console.log('row.expand',row.expand);
+    if (row.id < 2) return true;
     else return false;
   }
 
   expandComponent(row) {
-    console.log('row.expand',row.expand);
+
     return (
       <BSTable data={ row.expand } />
     );
@@ -82,21 +81,21 @@ class Dummy extends React.Component {
     console.log('products',products);
     const options = {
       expandRowBgColor: 'rgb(242, 255, 163)'
-      // expandBy: 'column'  // Currently, available value is row and column, default is row
     };
     return (
       <BootstrapTable data={ products }
         options={ options }
+        striped
         expandableRow={ this.isExpandableRow }
         expandComponent={ this.expandComponent }
-        search>
-        <TableHeaderColumn dataField='Book@Reoffer' isKey={ true }>Product ID</TableHeaderColumn>
-        <TableHeaderColumn dataField='Book_Size' expandable={ false }>Product Name</TableHeaderColumn>
-        <TableHeaderColumn dataField='CONTROL' expandable={ false }>Product Price</TableHeaderColumn>
-        <TableHeaderColumn dataField='Current_Cut_Off'>Product ID</TableHeaderColumn>
+
+        search
+         expandColumnOptions={ { expandColumnVisible: true } }>
+        <TableHeaderColumn dataField='id' isKey>Product ID</TableHeaderColumn>
+        <TableHeaderColumn dataField='name'>Product Name</TableHeaderColumn>
+        <TableHeaderColumn dataField='price'>Product Price</TableHeaderColumn>
       </BootstrapTable>
     );
   }
 }
-
-export default Dummy;
+export default D;
