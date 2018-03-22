@@ -7,8 +7,8 @@ import Dummy from './components/Dummy';
 
 export default (
   <Route path="/" component={App}>
-  <IndexRoute component={Table}/>
-      <Route path='/table' component={Btable}/>
+  <IndexRoute component={Btable}/>
+      <Route path='/table' component={Table}/>
         <Route path='/Dummy' component={Dummy}/>
 
   </Route>

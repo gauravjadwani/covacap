@@ -10,3 +10,9 @@ body {
   word-wrap: break-word !important;
       white-space: pre-wrap !important;
 }
+.react-bs-table-search-form{
+  margin-top: 10%;
+}
+.svgColor{
+fill:white !important;
+}
